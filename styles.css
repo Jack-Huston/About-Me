@@ -55,11 +55,12 @@ body{
 @media(min-width:768px){
   .nav-links{display:flex}.mobile-menu-btn{display:none}.mobile-menu{display:none}.nav-brand{position:static;transform:none}
 }
+/* Hide brand on small screens so it doesn't overlap the Back button */
+@media(max-width:767px){ .nav-brand{display:none} }
 
 /* Hero */
 .project-hero{padding:8rem 1rem 4rem;background:linear-gradient(135deg,var(--blue-50),var(--orange-50));border-bottom:2px solid var(--orange-100)}
 .project-hero-content{max-width:1280px;margin:0 auto;text-align:center}
-.project-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--orange-600),var(--red-600));color:#fff;padding:.5rem 1rem;border-radius:.5rem;font-weight:700;letter-spacing:.5px;margin-bottom:1.5rem}
 .project-hero-title{font-size:2.5rem;font-weight:bold;margin-bottom:1rem;color:var(--slate-800);background:linear-gradient(to right,var(--orange-700),var(--blue-700));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 @media(min-width:768px){.project-hero-title{font-size:3.5rem}}
 .project-hero-subtitle{font-size:1.25rem;color:var(--slate-600);max-width:48rem;margin:0 auto 2rem}
@@ -75,6 +76,7 @@ body{
 .container{max-width:56rem;margin:0 auto}
 .container-wide{max-width:1280px;margin:0 auto}
 .section-title{font-size:2.25rem;font-weight:bold;text-align:center;color:var(--slate-800);margin-bottom:2rem}
+.section-subtitle{text-align:center;color:var(--slate-600);font-size:1.125rem;margin-bottom:3rem}
 
 /* Summary */
 .about-card{background:linear-gradient(135deg,var(--blue-50),var(--orange-50));border:1px solid var(--blue-100);border-radius:1rem;padding:2rem;box-shadow:0 10px 15px rgba(0,0,0,.08)}
@@ -84,7 +86,7 @@ body{
 .bullet-list{list-style:none;margin:0;padding:0}
 .bullet-list li{position:relative;padding-left:1.25rem;margin:.5rem 0;color:var(--slate-600)}
 .bullet-list li:before{content:"→";position:absolute;left:0;color:var(--orange-600);font-weight:700}
-.summary-cards{display:grid;gap:1rem;margin-top:1rem}
+.summary-cards{display:grid;gap:1rem;margin-top:0}
 .mini-card{display:flex;gap:.75rem;align-items:center;background:#fff;border:1px solid var(--orange-100);border-radius:.75rem;padding:.75rem 1rem}
 .mini-card i{width:20px;height:20px;color:var(--orange-600)}
 .mini-title{font-weight:700;color:var(--slate-800)}
@@ -109,8 +111,11 @@ body{
 .detail-list{list-style:none;margin-top:.5rem}
 .detail-list li{padding-left:1.25rem;margin:.5rem 0;position:relative;color:var(--slate-700)}
 .detail-list li:before{content:"•";position:absolute;left:.25rem;color:var(--orange-600);font-weight:900}
-.centered-media{text-align:center;margin-top:1rem}
-.centered-media img{max-width:100%;height:auto;border-radius:.75rem;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+/* SAR photo row */
+.photo-row{display:grid;gap:1rem;margin-top:1rem}
+.photo-item img{width:100%;height:auto;border-radius:.75rem;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+@media(min-width:700px){.photo-row{grid-template-columns:1fr 1fr}}
 
 /* Education */
 .edu-grid{display:grid;gap:1rem}
@@ -121,7 +126,8 @@ body{
 .edu-header i{width:24px;height:24px;color:var(--orange-600);flex-shrink:0}
 .edu-title{font-weight:700;color:var(--slate-800)}
 .edu-sub{color:var(--slate-600)}
-.edu-when{margin-top:.5rem;color:var(--slate-600)}
+/* Align dates with school text block (indent to match text start after icon) */
+.edu-when{margin-top:.5rem;color:var(--slate-600);padding-left:40px}
 
 /* Leadership card */
 .detail-card{display:grid;gap:1.25rem;padding:1.5rem;background:#fff;border-radius:1rem;border:2px solid var(--orange-100);box-shadow:0 4px 10px rgba(0,0,0,.05)}
@@ -140,8 +146,8 @@ body{
 .spec-header h3{font-size:1rem;color:var(--slate-800)}
 .spec-content p{color:var(--slate-600);font-size:.95rem}
 
-/* Projects (copied behavior from Home to center last row on desktop) */
-.projects-grid{display:grid;gap:2rem;grid-template-columns:1fr}
+/* Projects (centered like Home) */
+.projects-grid{display:grid;gap:2rem;grid-template-columns:1fr;margin:0 auto}
 @media(min-width:640px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){
   .projects-grid{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center}

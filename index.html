@@ -126,7 +126,14 @@
           <a href="https://jack-huston.github.io/Jack%20Huston%20Resume.pdf" download class="btn-cv">
             <i data-lucide="download"></i><span>Download CV</span>
           </a>
-          <a href="mailto:jackthuston1@gmail.com" class="btn-learn-more">
+          <!-- EMAIL BUTTON #1 (enhanced mailto + clipboard) -->
+          <a
+            id="aboutEmailBtn"
+            href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+            data-email="jackthuston1@gmail.com"
+            data-mailto="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+            class="btn-learn-more"
+          >
             <i data-lucide="mail"></i><span>Contact Me</span>
           </a>
         </div>
@@ -148,8 +155,8 @@
               <div class="org">Lockheed Martin Space</div>
             </div>
             <div class="when-where">
-              <div class="where"><i data-lucide="map-pin"></i>Littleton, CO</div>
-              <div class="when"><i data-lucide="calendar"></i>May 2022 – Present</div>
+              <div class="where"><i data-lucide="map-pin"></i><span>Littleton, CO</span></div>
+              <div class="when"><i data-lucide="calendar"></i><span>May 2022 – Present</span></div>
             </div>
           </header>
           <ul class="detail-list">
@@ -170,8 +177,8 @@
               <div class="org">University of Colorado Boulder</div>
             </div>
             <div class="when-where">
-              <div class="where"><i data-lucide="map-pin"></i>Boulder, CO</div>
-              <div class="when"><i data-lucide="calendar"></i>Aug 2021 – May 2023</div>
+              <div class="where"><i data-lucide="map-pin"></i><span>Boulder, CO</span></div>
+              <div class="when"><i data-lucide="calendar"></i><span>Aug 2021 – May 2023</span></div>
             </div>
           </header>
           <p class="detail-text">
@@ -462,7 +469,14 @@
       <h2 class="cta-title">Let’s Connect</h2>
       <p class="cta-text">If you're working on ambitious propulsion or operations problems, I’d love to chat.</p>
       <div class="cta-buttons">
-        <a href="mailto:jackthuston1@gmail.com" class="btn-cta-primary">
+        <!-- EMAIL BUTTON #2 (enhanced mailto + clipboard) -->
+        <a
+          id="ctaEmailBtn"
+          href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+          data-email="jackthuston1@gmail.com"
+          data-mailto="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+          class="btn-cta-primary"
+        >
           <i data-lucide="mail"></i>
           <span>Email Me</span>
         </a>
@@ -474,18 +488,41 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer (updated to include buttons) -->
   <footer class="footer">
     <div class="footer-content">
       <span>© 2025 Jack Huston.</span>
       <i data-lucide="rocket" class="icon-footer"></i>
       <span>Propelling aerospace innovation, one engine at a time.</span>
     </div>
+    <div class="footer-links">
+      <a
+        id="footerEmailBtn"
+        class="footer-card"
+        href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+        data-email="jackthuston1@gmail.com"
+        data-mailto="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
+      >
+        <i data-lucide="mail"></i>
+        <span>Email</span>
+      </a>
+      <a class="footer-card" href="https://www.linkedin.com/in/jack-huston/" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="linkedin"></i>
+        <span>LinkedIn</span>
+      </a>
+    </div>
   </footer>
 
+  <!-- Small toast that slides up on copy -->
+  <div id="clipboardToast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+    Copied to Clipboard
+  </div>
+
   <script>
+    // Icons
     lucide.createIcons();
 
+    // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
@@ -506,12 +543,58 @@
       });
     });
 
+    // Navbar background subtle shift on scroll
     window.addEventListener('scroll', () => {
       const navbar = document.querySelector('.navbar');
       navbar.style.backgroundColor = window.scrollY > 50
         ? 'rgba(255, 255, 255, 0.98)'
         : 'rgba(255, 255, 255, 0.95)';
     });
+
+    // --- Clipboard + Toast helpers (used by all Email buttons) ---
+    const toast = document.getElementById('clipboardToast');
+    function showToast() {
+      if (!toast) return;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+    function enhanceEmailLink(anchorId){
+      const el = document.getElementById(anchorId);
+      if(!el) return;
+      el.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const email = el.dataset.email;
+        const mailto = el.dataset.mailto || el.href;
+        const copied = await copyText(email);
+        if (copied) showToast();
+        setTimeout(()=>{ window.location.href = mailto; }, 60);
+      });
+    }
+    // Apply to both "Email Me" buttons (and footer Email)
+    enhanceEmailLink('aboutEmailBtn');
+    enhanceEmailLink('ctaEmailBtn');
+    enhanceEmailLink('footerEmailBtn');
 
     setTimeout(() => lucide.createIcons(), 100);
   </script>

@@ -92,7 +92,7 @@
             </div>
           </div>
 
-          <!-- Right: summary cards (moved here) -->
+          <!-- Right: summary cards -->
           <div>
             <div class="summary-cards">
               <div class="mini-card">
@@ -126,7 +126,7 @@
           <a href="https://jack-huston.github.io/Jack%20Huston%20Resume.pdf" download class="btn-cv">
             <i data-lucide="download"></i><span>Download CV</span>
           </a>
-          <!-- EMAIL BUTTON #1 (enhanced mailto + clipboard) -->
+          <!-- EMAIL BUTTON #1 -->
           <a
             id="aboutEmailBtn"
             href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
@@ -302,13 +302,14 @@
     </div>
   </section>
 
-  <!-- Projects (styled like Home page, centered) -->
+  <!-- Projects -->
   <section id="projects" class="section">
     <div class="container-wide">
       <h2 class="section-title">Featured Projects</h2>
       <p class="section-subtitle">Explore my work across propulsion, instrumentation, and embedded systems</p>
 
       <div class="projects-grid">
+        <!-- Project cards unchanged for brevity (keep your existing 1–5 cards) -->
         <!-- Project 1 -->
         <a href="https://jack-huston.github.io/Ice-Plume-Detector" class="project-card">
           <div class="project-image-container">
@@ -463,53 +464,40 @@
     </div>
   </section>
 
-  <!-- Contact / CTA -->
-  <section id="contact" class="section cta-section">
-    <div class="container">
-      <h2 class="cta-title">Let’s Connect</h2>
-      <p class="cta-text">If you're working on ambitious propulsion or operations problems, I’d love to chat.</p>
-      <div class="cta-buttons">
-        <!-- EMAIL BUTTON #2 (enhanced mailto + clipboard) -->
+  <!-- Contact Section (CTA — use main-site design) -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-glow"></div>
+    <div class="container contact-container">
+      <h2 class="section-title contact-title">Let's Connect</h2>
+      <p class="contact-subtitle">
+        I'd be happy to discuss my experience in more detail or explore potential career opportunities.
+      </p>
+      <div class="contact-links">
+        <!-- EMAIL BUTTON #2 -->
         <a
           id="ctaEmailBtn"
           href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
           data-email="jackthuston1@gmail.com"
           data-mailto="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
-          class="btn-cta-primary"
+          class="contact-card"
         >
-          <i data-lucide="mail"></i>
+          <i data-lucide="mail" class="icon-contact"></i>
           <span>Email Me</span>
         </a>
-        <a href="https://jack-huston.github.io/#projects" class="btn-cta-secondary">
-          <i data-lucide="arrow-left"></i>
-          <span>View Projects</span>
+        <a href="https://www.linkedin.com/in/jack-huston/" target="_blank" rel="noopener noreferrer" class="contact-card">
+          <i data-lucide="linkedin" class="icon-contact"></i>
+          <span>LinkedIn</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer (updated to include buttons) -->
+  <!-- Footer (reverted to normal/simple) -->
   <footer class="footer">
     <div class="footer-content">
       <span>© 2025 Jack Huston.</span>
       <i data-lucide="rocket" class="icon-footer"></i>
       <span>Propelling aerospace innovation, one engine at a time.</span>
-    </div>
-    <div class="footer-links">
-      <a
-        id="footerEmailBtn"
-        class="footer-card"
-        href="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
-        data-email="jackthuston1@gmail.com"
-        data-mailto="mailto:jackthuston1@gmail.com?subject=Contact%20via%20Jack-Huston.github.io&body=Hi%20Jack,%0D%0A%0D%0A"
-      >
-        <i data-lucide="mail"></i>
-        <span>Email</span>
-      </a>
-      <a class="footer-card" href="https://www.linkedin.com/in/jack-huston/" target="_blank" rel="noopener noreferrer">
-        <i data-lucide="linkedin"></i>
-        <span>LinkedIn</span>
-      </a>
     </div>
   </footer>
 
@@ -519,10 +507,9 @@
   </div>
 
   <script>
-    // Icons
     lucide.createIcons();
 
-    // Mobile menu toggle
+    // Mobile menu
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const menuIcon = document.getElementById('menuIcon');
@@ -551,7 +538,7 @@
         : 'rgba(255, 255, 255, 0.95)';
     });
 
-    // --- Clipboard + Toast helpers (used by all Email buttons) ---
+    // --- Clipboard + Toast helpers ---
     const toast = document.getElementById('clipboardToast');
     function showToast() {
       if (!toast) return;
@@ -564,7 +551,6 @@
           await navigator.clipboard.writeText(text);
           return true;
         }
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = text;
         ta.setAttribute('readonly', '');
@@ -591,10 +577,8 @@
         setTimeout(()=>{ window.location.href = mailto; }, 60);
       });
     }
-    // Apply to both "Email Me" buttons (and footer Email)
     enhanceEmailLink('aboutEmailBtn');
     enhanceEmailLink('ctaEmailBtn');
-    enhanceEmailLink('footerEmailBtn');
 
     setTimeout(() => lucide.createIcons(), 100);
   </script>

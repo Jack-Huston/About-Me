@@ -193,3 +193,117 @@ body{
   .section-title{font-size:2rem}
   .detail-card{padding:1.25rem}
 }
+
+/* ------ Adjust nav breakpoint: switch to desktop at 1100px ------ */
+@media (min-width: 1100px) {
+  .nav-links { display: flex; }
+  .mobile-menu-btn { display: none; }
+  .mobile-menu { display: none; }
+}
+
+/* If you have an earlier breakpoint enabling .nav-links at 768px, override it: */
+@media (min-width: 768px) {
+  /* keep empty or ensure nav-links stay hidden until 1100px */
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: block; }
+}
+
+/* ------ Align icons with text in Experience ------ */
+.when-where {
+  display: flex;
+  gap: 1rem;
+  align-items: center;        /* center the two blocks vertically */
+  color: var(--slate-600);
+}
+.when-where i {
+  width: 16px;
+  height: 16px;
+  color: var(--orange-600);
+}
+.when-where .where,
+.when-where .when {
+  display: inline-flex;       /* icon + text inline */
+  align-items: center;        /* vertical center */
+  gap: .35rem;                /* space between icon and text */
+}
+
+/* ------ Mobile stacking for CV/Contact buttons (icon above text) ------ */
+@media (max-width: 767px) {
+  .about-buttons-container { gap: .75rem; }
+  .btn-cv, .btn-learn-more {
+    flex-direction: column;   /* icon above text */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .btn-cv i, .btn-learn-more i { margin: 0; }
+}
+
+/* ------ Center mountain icon in Leadership on mobile ------ */
+@media (max-width: 767px) {
+  .detail-icon-container {
+    margin-left: auto;
+    margin-right: auto;       /* centers horizontally */
+  }
+}
+
+/* ------ Footer buttons (to match contact-style buttons) ------ */
+.footer {
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--orange-100);
+  background: #fff;
+}
+.footer-links {
+  max-width: 1280px;
+  margin: 0.75rem auto 0;
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer-card {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: #fff;
+  padding: .6rem 1rem;
+  border-radius: .6rem;
+  border: 2px solid var(--orange-100);
+  color: var(--slate-700);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+.footer-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--orange-300);
+  background: var(--orange-50);
+}
+.footer-card i {
+  width: 18px;
+  height: 18px;
+  color: var(--orange-600);
+}
+
+/* ------ Small "Copied to Clipboard" toast ------ */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:-60px;
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:.6rem 1rem;
+  border-radius:.5rem;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  font-size:.95rem;
+  z-index:1100;
+  opacity:0;
+  transition:transform .35s ease, opacity .35s ease, bottom .35s ease;
+}
+.toast.show{
+  bottom:18px;
+  opacity:1;
+}
+
